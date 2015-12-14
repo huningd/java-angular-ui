@@ -1,0 +1,11 @@
+<div style="text-alignment:center">
+    <h2 *ng-if="user.surname"> Hallo {{user.surname}} {{user.forname}}  </h2>
+    <h2 *ng-if="!user.surname"> Hallo Benutzer {{user.username}}</h2>
+    <div *ng-if="user.username">Benutzername: {{user.username}}</div>
+    <div *ng-if="user.email">E-Mail: {{user.email}}</div>
+    <div *ng-if="user.birthdate">Geburtstag: {{user.birthdate}}</div>
+    Berechtigungen:<br/>
+    <li *ng-for="#authority of user.authorities">
+        {{$index}} {{authority}}
+    </li>
+</div>

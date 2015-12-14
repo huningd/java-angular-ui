@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>{{title}}</h1>
+
+  <header>
+    <nav class="navbar navbar-default">
+      <ul class="nav navbar-nav">
+        <li *ng-if="authenticated" ><a class="link" [router-link]="['/Home']">Home</a></li>
+        <li *ng-if="authenticated" ><a class="link" [router-link]="['/BuergerList']">Bürger</a></li>
+        <li *ng-if="authenticated" ><a class="link" [router-link]="['/User']">Benutzer</a></li>
+        <li *ng-if="!authenticated" ><a class="link" href="../login">Login</a></li>
+        <li *ng-if="authenticated" ><a class="link" (click)="logoutServer()">Logout</a></li>
+        <!--li ><a class="link" [router-link]="['/Login']">Login</a></li-->
+      </ul>
+    </nav>
+  </header>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
