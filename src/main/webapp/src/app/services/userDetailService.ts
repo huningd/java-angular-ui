@@ -1,7 +1,7 @@
-import {Inject} from 'angular2/core';
-import {Http} from 'angular2/http';
+import {Inject, Injectable} from 'angular2/core';
+import {Http, HTTP_PROVIDERS} from 'angular2/http';
 
-export class User{
+export interface User{
     username: string;
     forname: string;
     surname: string;
@@ -10,9 +10,10 @@ export class User{
     authorities: Array<string>;    
 }
 
+@Injectable()
 export class UserDetailService {
 
-    constructor(@Inject(Http) public http: Http) {
+    constructor(private http: Http) {
           this.userDetails();
     }
 
@@ -26,10 +27,8 @@ export class UserDetailService {
 
     userDetails(){
         this.http.get('../user')
-            .retry(2)
-            .map(res => res.text())
             .subscribe(
-                  data => localStorage.setItem('user', data),
+                  res => localStorage.setItem('user', res.text()),
                   err => this.logError(err),
                   () => console.log('User loaded' + JSON.stringify(this.get()))
             );

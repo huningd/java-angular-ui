@@ -1,10 +1,10 @@
-import { Component, View, CORE_DIRECTIVES } from 'angular2/angular2';
+import { Component, View } from 'angular2/core';
 import {Http, Headers, HTTP_PROVIDERS } from 'angular2/http';
 
 @Component({})
 @View({
 	templateUrl: 'app/components/home/home.html',
-	directives: [CORE_DIRECTIVES]
+	directives: []
 })
 export class Home {
 

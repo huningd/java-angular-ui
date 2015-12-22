@@ -1,4 +1,4 @@
-import {View, Component, FORM_PROVIDERS, CORE_DIRECTIVES } from 'angular2/angular2';
+import {View, Component, OnInit} from 'angular2/core';
 import {Location, RouteConfig, RouterLink, Router, ROUTER_PROVIDERS, ROUTER_DIRECTIVES } from 'angular2/router';
 import {Http, Headers, HTTP_PROVIDERS } from 'angular2/http';
 
@@ -13,23 +13,27 @@ import {UserDetailService} from './services/userDetailService';
 	selector: 'app'
 })
 @View({
-	directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES],
+	directives: [ROUTER_DIRECTIVES],
 	templateUrl: 'app/app.html'
 })
 @RouteConfig([
-    {path: '/', redirectTo: '/Home'},
-    {path: '/home', component: Home, as: 'Home' },
-    {path: '/buerger', component: BuergerList, as: 'BuergerList' },
-    {path: '/user', component: UserComp, as: 'User' },
-    {path: '/login', redirectTo: '../login'}
+    //{path: '/', redirectTo: '/Home'},
+    {path: '/home', component: Home, name: 'Home' },
+    {path: '/buerger', component: BuergerList, name: 'BuergerList' },
+    {path: '/user', component: UserComp, name: 'User' }
+    //{path: '/login', redirectTo: '../login'}
 ])
-export class App {
+export class App implements OnInit{
 	title = 'Angular Bürgerservice Prototype';
   user: any;
   authenticated = false;
-  
+
   constructor(public router: Router, public http: Http, public location: Location, public userDetailService: UserDetailService) {
-    this.user = userDetailService.get();
+      
+  }
+
+  ngOnInit() {
+    this.user = this.userDetailService.get();
     if(this.user.username){
       this.authenticated = true;
     }
